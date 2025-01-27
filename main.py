@@ -99,7 +99,9 @@ def main_app():
 
                     
     elif menu == "Speed Test":
-        st.write("Feature: Speed Test")
+        from features.speed_test import speed_test_ui
+        speed_test_ui()
+            
     elif menu == "DNS Lookup":
         st.write("Feature: DNS Lookup")
     elif menu == "Geolocation":
