@@ -5,6 +5,68 @@ from features.private_ip import get_private_ip
 from features.ping_test import get_computer_ping, ping_domain, is_valid_domain
 import matplotlib.pyplot as plt
 
+def add_footer():
+    footer = """
+    <style>
+    .footer-container {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background-color: transparent;
+        padding: 10px 20px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-size: 14px;
+        font-family: Arial, sans-serif;
+        color: rgba(240, 240, 240, 0.6);
+        border-top: 1px solid rgba(240, 240, 240, 0.2);
+    }
+    .footer-center {
+        flex-grow: 1; /* Ensure the name stays in the center */
+        text-align: center;
+    }
+    .footer-links {
+        display: flex;
+        align-items: center;
+    }
+    .footer-links a {
+        margin-left: 15px;
+        color: #1f77b4;
+        text-decoration: none;
+    }
+    .footer-links a:hover {
+        text-decoration: underline;
+    }
+    .footer-links img {
+        width: 20px;
+        height: 20px;
+        vertical-align: middle;
+    }
+    </style>
+    <div class="footer-container">
+        <div></div> <!-- Empty div for alignment purposes -->
+        <div class="footer-center">
+            Developed by <b>Mihit Singasane</b>
+        </div>
+        <div class="footer-links">
+            <a href="https://github.com/Mihit10" target="_blank">
+                <img src="https://cdn-icons-png.flaticon.com/512/733/733553.png" alt="GitHub">
+            </a>
+            <a href="https://www.linkedin.com/in/mihit-singasane-71153128b" target="_blank">
+                <img src="https://cdn-icons-png.flaticon.com/512/145/145807.png" alt="LinkedIn">
+            </a>
+            <a style="margin-right: 50px;" href="https://devfolio.co/@Mihit10" target="_blank">
+                <img src="https://cdn-icons-png.flaticon.com/512/1177/1177568.png" alt="Devfolio">
+            </a>
+        </div>
+    </div>
+    """
+    st.markdown(footer, unsafe_allow_html=True)
+
+
+
 # Streamlit App Title
 def main_app():
     st.title("Network Testing App")
@@ -18,11 +80,19 @@ def main_app():
 
     # Pages Placeholder
     if menu == "Home":
-        st.write("Welcome to the Network Testing App! Select a feature from the sidebar.")
+        st.title("Welcome to the Network Utility App!")
+        st.write("""
+        This app provides essential network tools:
+        - Discover your public and private IP addresses.
+        - Test your network speed and ping.
+        - Lookup DNS records and analyze geolocation data.
+        """)
+
     elif menu == "Public IP":
         st.header("Public IP Address")
         ip = get_public_ip()
         st.write(f"Your Public IP Address: {ip}")
+    
     elif menu == "Private IP":
         st.header("Private IP Address")
         ip = get_private_ip()
@@ -95,9 +165,7 @@ def main_app():
                             st.pyplot(fig)
                 else:
                     st.error("Please enter a valid domain or IP address.")
-
-
-                    
+              
     elif menu == "Speed Test":
         from features.speed_test import speed_test_ui
         speed_test_ui()
@@ -142,8 +210,6 @@ def main_app():
             else:
                 st.error("Please enter a valid domain name.")
 
-
-
     elif menu == "Geolocation":
         st.header("Geolocation")
 
@@ -181,6 +247,9 @@ def main_app():
                     st.map(map_data, zoom=5)
             else:
                 st.error("Please enter a valid IP address or domain.")
+
+    add_footer()
+
 
 
 
