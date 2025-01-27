@@ -17,6 +17,7 @@ A simple yet powerful **Streamlit-based web application** for performing various
      - Minimum, Average, Maximum, Median ping times
      - Jitter analysis
      - Interactive graph displaying ping over time.
+   - (only available when running locally)
 
 4. **Speed Test**  
    - Measure your network's download and upload speeds interactively, with attention-grabbing progress messages during testing.
@@ -50,3 +51,7 @@ A simple yet powerful **Streamlit-based web application** for performing various
 1. **Clone the repository**:
    ```bash
    git clone https://github.com/Mihit10/network-testing-app.git
+   ```
+   ```
+   streamlit run main.py
+   ```
