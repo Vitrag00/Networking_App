@@ -101,9 +101,49 @@ def main_app():
     elif menu == "Speed Test":
         from features.speed_test import speed_test_ui
         speed_test_ui()
-            
+
     elif menu == "DNS Lookup":
-        st.write("Feature: DNS Lookup")
+        st.header("DNS Lookup")
+
+        # User input for domain name
+        domain = st.text_input("Enter the domain name:", key="dns_input")
+
+        # Dropdown to select record type
+        record_type = st.selectbox(
+            "Select the DNS record type:",
+            ["A", "MX", "NS", "TXT", "CNAME"],
+            key="dns_record_type"
+        )
+
+        # Info about DNS record types
+        with st.expander("What do these DNS record types mean?"):
+            st.write("""
+            - **A**: Maps a domain to an IPv4 address (e.g., `example.com -> 192.168.1.1`).
+            - **MX**: Specifies the mail servers responsible for emails sent to the domain.
+            - **NS**: Lists the authoritative nameservers for the domain.
+            - **TXT**: Provides additional text-based information, often used for security (e.g., SPF, DKIM).
+            - **CNAME**: Alias for another domain (e.g., `www.example.com -> example.com`).
+            """)
+
+        if st.button("Perform DNS Lookup", key="dns_lookup"):
+            if domain:
+                # Call the DNS lookup function
+                from features.dns_lookup import perform_dns_lookup
+                with st.spinner("Performing DNS lookup..."):
+                    result = perform_dns_lookup(domain, record_type)
+
+                # Display results
+                if "error" in result:
+                    st.error(result["error"])
+                else:
+                    st.success(f"{record_type} Records for {domain}:")
+                    for record in result["results"]:
+                        st.write(record)
+            else:
+                st.error("Please enter a valid domain name.")
+
+
+
     elif menu == "Geolocation":
         st.write("Feature: Geolocation Mapping")
 
