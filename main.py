@@ -145,7 +145,44 @@ def main_app():
 
 
     elif menu == "Geolocation":
-        st.write("Feature: Geolocation Mapping")
+        st.header("Geolocation")
+
+        # User input for IP address or domain
+        ip_or_domain = st.text_input("Enter an IP address or domain to locate:", key="geo_input")
+
+        if st.button("Get Geolocation", key="geo_button"):
+            if ip_or_domain:
+                # Call the geolocation function
+                from features.geolocation import get_geolocation
+                with st.spinner("Fetching geolocation data..."):
+                    result = get_geolocation(ip_or_domain)
+
+                # Display results
+                if "error" in result:
+                    st.error(result["error"])
+                else:
+                    st.success(f"Geolocation Data for {ip_or_domain}:")
+                    st.write(f"**IP**: {result['ip']}")
+                    st.write(f"**Country**: {result['country']}")
+                    st.write(f"**Region**: {result['region']}")
+                    st.write(f"**City**: {result['city']}")
+                    st.write(f"**Latitude**: {result['lat']}")
+                    st.write(f"**Longitude**: {result['lon']}")
+                    st.write(f"**ISP**: {result['isp']}")
+
+                    # Optional: Display a map
+                    import pandas as pd
+
+                    # Create a DataFrame for the map
+                    map_data = pd.DataFrame(
+                        [{"latitude": result["lat"], "longitude": result["lon"]}]
+                    )
+
+                    st.map(map_data, zoom=5)
+            else:
+                st.error("Please enter a valid IP address or domain.")
+
+
 
 
 # Combine Loading Screen with Main App
