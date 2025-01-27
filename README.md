@@ -30,11 +30,6 @@ A simple yet powerful **Streamlit-based web application** for performing various
      - Latitude & Longitude
      - Internet Service Provider (ISP)
 
-7. **Footer**  
-   - A polished footer displaying:
-     - **Developer name**: Mihit Singasane
-     - Links to GitHub, LinkedIn, and Devfolio with respective icons.
-
 ---
 
 ## 🛠️ Tech Stack
