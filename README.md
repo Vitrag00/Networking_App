@@ -50,7 +50,7 @@ A simple yet powerful **Streamlit-based web application** for performing various
 
 1. **Clone the repository**:
    ```bash
-   git clone https://github.com/Mihit10/network-testing-app.git
+   git clone https://github.com/Vitrag00/Networking_App.git
    ```
    ```
    streamlit run main.py
